@@ -24,8 +24,8 @@ function fetchSpecificBlogPost(blogPosts_id) {
 
 function insertBlogPost(blogPost) {
   const queryString = `
-    INSERT INTO blogs (title, author, date, content)
-    VALUES ($1, $2, $3, $4)
+    INSERT INTO blogs (title, author, date, content, img_url)
+    VALUES ($1, $2, $3, $4, $5)
     RETURNING *;`;
   return db
     .query(queryString, [
@@ -33,6 +33,7 @@ function insertBlogPost(blogPost) {
       blogPost.author,
       blogPost.date,
       blogPost.content,
+      blogPost.img_url,
     ])
     .then(({ rows }) => {
       return rows;

@@ -32,16 +32,17 @@ function getSpecificBlogPost(req, res, next) {
 }
 
 function postBlogPost(req, res, next) {
-  const { title, author, date, content } = req.body;
-
-  if (!title || !author || !date || !content) {
+  const { title, author, date, content, img_url } = req.body;
+  console.log(req.body);
+  if (!title || !author || !date || !content || !img_url) {
     return res.status(400).send({ msg: "Bad request" });
   }
-  insertBlogPost({ title, author, date, content })
+  insertBlogPost({ title, author, date, content, img_url })
     .then((blogPost) => {
       res.status(201).send(blogPost);
     })
     .catch((err) => {
+      console.log(err, "<<<<");
       next(err);
     });
 }

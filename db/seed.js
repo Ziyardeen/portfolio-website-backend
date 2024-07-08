@@ -18,8 +18,9 @@ function createBlogs() {
         title VARCHAR(255) NOT NULL,
         author VARCHAR(255) NOT NULL,
         date DATE NOT NULL,
-        content TEXT NOT NULL
-      );`
+        content TEXT NOT NULL,
+        img_url VARCHAR(255) NOT NULL
+        );`
     )
     .catch((err) => {
       throw new Error(`createBlogs: ${err}`);
@@ -28,8 +29,8 @@ function createBlogs() {
 
 function insertBlogs(blogPosts) {
   const queryString = `
-    INSERT INTO blogs (title, author, date, content)
-    VALUES ($1, $2, $3, $4)
+    INSERT INTO blogs (title, author, date, content,img_url)
+    VALUES ($1, $2, $3, $4, $5)
     RETURNING *;`;
 
   const promises = blogPosts.map((blogPost) => {
@@ -39,6 +40,7 @@ function insertBlogs(blogPosts) {
         blogPost.author,
         blogPost.date,
         blogPost.content,
+        blogPost.img_url,
       ])
       .catch((err) => {
         throw new Error(`insertBlogs: ${err}`);
