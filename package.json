@@ -9,8 +9,7 @@
     "dev": "nodemon app.js",
     "setup-dbs": "psql -f ./db/setup.sql",
     "seed": "node ./db/seed.js",
-    "test": "jest",
-    "prepare": "husky install"
+    "test": "jest"
   },
   "keywords": [],
   "author": "",
